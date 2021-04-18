@@ -1,4 +1,4 @@
-export interface PeriodicElement {
+export interface Opportunity {
     id: number;
     skills: string;
     date: string;

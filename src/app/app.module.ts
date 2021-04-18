@@ -14,6 +14,7 @@ import {
 } from 'angularx-social-login';
 import { OpportunitiesComponent } from './components/opportunities/opportunities.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {
