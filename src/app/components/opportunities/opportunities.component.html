@@ -49,14 +49,25 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="opportunityForm" (ngSubmit)="onSubmit()">
-          <label>ED</label>
-          <input type="text" formControlName="ed">
-          <label>Skills</label>
-          <input type="text" formControlName="skills">
-          <label>Location</label>
-          <input type="text" formControlName="location">
-          <label>Date</label>
-          <input type="text" formControlName="date">
+        <mat-form-field appearance="fill">
+          <mat-label>ED</mat-label>
+          <input matInput type="text" formControlName="ed">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Skills</mat-label>
+          <input matInput type="text" formControlName="skills">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" formControlName="location">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="md-datepicker-calendar-pane">
+          <mat-label>Date</mat-label>
+          <input type="date" formControlName="date" matInput>
+          <!-- <input matInput [matDatepicker]="picker" type="text" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker> -->
+        </mat-form-field>
         </form>
       </div>
       <div class="modal-footer">

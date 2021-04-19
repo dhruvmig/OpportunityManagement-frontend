@@ -48,3 +48,6 @@ table {
   .container{
       margin: 50px;
   }
+  mat-form-field { 
+    z-index: 1200; 
+}

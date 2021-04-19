@@ -34,6 +34,7 @@ export class OpportunitiesComponent implements OnInit {
   }
 
   openDialog(opportunity:any,mode:string){
+    this.opportunityForm.reset();
         const container = document.getElementById('main-container');
         const button = document.createElement('button');
         button.type = 'button';
