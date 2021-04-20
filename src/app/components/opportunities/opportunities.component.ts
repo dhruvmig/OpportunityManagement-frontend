@@ -19,8 +19,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class OpportunitiesComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
   dataSource?:any;
-  dataS?:any;
-  columnsToDisplay = ['id', 'skills', 'date', 'location','  '];
+  data?:Opportunity[];
+  columnsToDisplay = ['id', 'skills', 'date', 'location'];
   expandedElement?: Opportunity | null;
   opportunityForm = this.fb.group({
     ed:[''],
@@ -28,13 +28,10 @@ export class OpportunitiesComponent implements OnInit {
     location:[''],
     date:['']
   })
-   displayedColumns:string[] = ['position', 'name', 'weight', 'symbol'];
   constructor(private opportunityService:OpportunityService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
      this.getEmployee();
-     
-    this.dataS = new MatTableDataSource(this.dataSource);
   }
 
   openDialog(opportunity:any,mode:string){
@@ -53,9 +50,12 @@ export class OpportunitiesComponent implements OnInit {
 
   }
   getEmployee(){
-    this.opportunityService.getEmployees().subscribe((response)=>{
+    this.opportunityService.getOpportunity().subscribe((response)=>{
       this.dataSource = response;
-      console.log(response);
+      // console.log('in add',this.dataSource);
+      this.dataSource = new MatTableDataSource(this.dataSource);
+      // console.log("final",this.dataSource)
+
     },
     (error)=>{
       console.log("error to get opportunities",error);
@@ -63,7 +63,7 @@ export class OpportunitiesComponent implements OnInit {
   }
   onSubmit(){
     console.log('form data is ',this.opportunityForm.value);
-    this.opportunityService.addEmployee(this.opportunityForm.value).subscribe((opportunity)=>{
+    this.opportunityService.addOpportunity(this.opportunityForm.value).subscribe((opportunity)=>{
         console.log("employe added successfully",opportunity);
         this.getEmployee();
     },
@@ -75,6 +75,9 @@ export class OpportunitiesComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataS.filter = filterValue.trim().toLowerCase();
+    console.log("filtervalue is ",filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    
+    
   }
 }

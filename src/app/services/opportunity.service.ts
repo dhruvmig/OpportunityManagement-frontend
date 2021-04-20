@@ -10,11 +10,11 @@ export class OpportunityService {
 
   constructor(private http:HttpClient) { }
 
-  public getEmployees(): Observable<Opportunity[]> {
+  public getOpportunity(): Observable<Opportunity[]> {
     return this.http.get<Opportunity[]>(`http://localhost:8080/opportunity`);
   }
 
-  public addEmployee(opportunity: Opportunity): Observable<Opportunity> {
+  public addOpportunity(opportunity: Opportunity): Observable<Opportunity> {
     console.log("in service ",opportunity)
     return this.http.post<Opportunity>(`http://localhost:8080/opportunities/add`, opportunity);
 
