@@ -23,5 +23,8 @@ export class OpportunityService {
   public deleteOpportunity(id:number){
     return this.http.delete(`http://localhost:8080/opportunity/delete/${id}`);
   }
+  public updateOpportunity(id:number,opportunity:Opportunity){
+    return this.http.put(`http://localhost:8080/opportunity/update/${id}`,opportunity);
+  }
 
 }

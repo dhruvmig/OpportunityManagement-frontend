@@ -10,31 +10,42 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <th mat-header-cell *matHeaderCellDef> ID. </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
   
+    <ng-container matColumnDef="ed">
+      <th mat-header-cell *matHeaderCellDef> ED </th>
+      <td mat-cell *matCellDef="let element"> {{element.ed}} </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="skills">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Skills </th>
       <td mat-cell *matCellDef="let element"> {{element.skills}} </td>
     </ng-container>
   
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+    
     <!-- Weight Column -->
     <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <th mat-header-cell *matHeaderCellDef> Location </th>
       <td mat-cell *matCellDef="let element"> {{element.location}} </td>
     </ng-container>
   
     <!-- Symbol Column -->
-    <ng-container matColumnDef="ed">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.ed}} </td>
+    <ng-container matColumnDef=" ">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> 
+            <mat-icon (click)="openDialog(element,'edit')">edit</mat-icon>  
+            <mat-icon (click)="openDialog(element,'delete')">delete</mat-icon>  
+      </td>
     </ng-container>
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-    </ng-container>
+   
+    
   
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
@@ -44,26 +55,6 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr> -->
   </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 
@@ -106,3 +97,64 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="deleteOpportunityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Delete Opportunity</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure , you want to delete this opportunity</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="onDelete(deleteOpportunity)" data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editOpportunityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="opportunityForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>ED</mat-label>
+          <input matInput type="text" formControlName="ed" ngModel={{editOpportunity?.ed}}>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Skills</mat-label>
+          <input matInput type="text" formControlName="skills" ngModel={{editOpportunity?.skills}}>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <input matInput type="text" formControlName="location" ngModel={{editOpportunity?.location}}>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="md-datepicker-calendar-pane">
+          <mat-label>Date</mat-label>
+          <input type="date" formControlName="date" matInput ngModel={{editOpportunity?.date}}>
+        </mat-form-field>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

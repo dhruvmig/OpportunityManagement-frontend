@@ -20,7 +20,7 @@ export class OpportunitiesComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
   dataSource?:any;
   data?:Opportunity[];
-  columnsToDisplay = ['id', 'skills', 'date', 'location'];
+  columnsToDisplay = ['id','ed', 'skills', 'date', 'location',' '];
   expandedElement?: Opportunity | null;
   opportunityForm = this.fb.group({
     ed:[''],
@@ -28,6 +28,8 @@ export class OpportunitiesComponent implements OnInit {
     location:[''],
     date:['']
   })
+  deleteOpportunity: any;
+  editOpportunity: any;
   constructor(private opportunityService:OpportunityService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class OpportunitiesComponent implements OnInit {
   }
 
   openDialog(opportunity:any,mode:string){
-    this.opportunityForm.reset();
+    
         const container = document.getElementById('main-container');
         const button = document.createElement('button');
         button.type = 'button';
@@ -43,7 +45,18 @@ export class OpportunitiesComponent implements OnInit {
         button.setAttribute('data-toggle','modal');
         if(mode === 'add')
         {
+          this.opportunityForm.reset();
           button.setAttribute('data-target','#addOpportunityModal');
+        }
+        if(mode === 'delete')
+        {
+          this.deleteOpportunity = opportunity;
+          button.setAttribute('data-target','#deleteOpportunityModal');
+        }
+        if(mode === 'edit')
+        {
+          this.editOpportunity = opportunity;
+          button.setAttribute('data-target','#editOpportunityModal');
         }
         container!.appendChild(button);
         button.click();
@@ -52,7 +65,7 @@ export class OpportunitiesComponent implements OnInit {
   getEmployee(){
     this.opportunityService.getOpportunity().subscribe((response)=>{
       this.dataSource = response;
-      // console.log('in add',this.dataSource);
+      console.log('in add',this.dataSource);
       this.dataSource = new MatTableDataSource(this.dataSource);
       // console.log("final",this.dataSource)
 
@@ -62,9 +75,9 @@ export class OpportunitiesComponent implements OnInit {
     })
   }
   onSubmit(){
-    console.log('form data is ',this.opportunityForm.value);
-    this.opportunityService.addOpportunity(this.opportunityForm.value).subscribe((opportunity)=>{
-        console.log("employe added successfully",opportunity);
+    // console.log('form data is ',this.opportunityForm.value);
+    this.opportunityService.addOpportunity (this.opportunityForm.value).subscribe((opportunity)=>{
+        // console.log("employe added successfully",opportunity);
         this.getEmployee();
     },
     (err)=>{
@@ -75,9 +88,26 @@ export class OpportunitiesComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log("filtervalue is ",filterValue)
+    // console.log("filtervalue is ",filterValue)
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    
-    
+  }
+  onEdit(element:any){
+    // console.log("edittting",this.opportunityForm.value,element)
+    this.opportunityService.updateOpportunity (element.id ,this.opportunityForm.value).subscribe((opportunity)=>{
+      // console.log("employe added successfully",opportunity);
+      this.getEmployee();
+  },
+  (err)=>{
+    console.log("error to add opprotunity")
+  });
+  }
+
+  onDelete(element:any){
+    // console.log("deleting",element);
+
+    this.opportunityService.deleteOpportunity(element.id).subscribe((element)=>{
+      // console.log(element);
+      this.getEmployee();
+    });
   }
 }
