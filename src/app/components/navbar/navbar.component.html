@@ -10,7 +10,8 @@
     />
     <span>Welcome</span>
       <div class="spacer"></div>
-      <a routerLink="/opportunities">Opportunities</a>
+      <a routerLink="/opportunities" *ngIf="loggedIn()">Opportunities</a>
+      <a (click)="logout()" *ngIf="loggedIn()">Logout</a>
   </div>
 
   

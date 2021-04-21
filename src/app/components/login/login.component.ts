@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
+import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: SocialAuthService) {
+    private authService: SocialAuthService,
+    private cookie:CookieService,
+    private loginService: LoginService) {
       this.loginForm = this.fb.group({
         username: ['', Validators.email],
         password: ['', Validators.required]
@@ -40,6 +44,12 @@ export class LoginComponent implements OnInit {
   signInWithGoogle(): void {
      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user)=>{
        this.user = user;
+       this.cookie.set('token',user.authToken);
+       this.loginService.login(this.user).subscribe((result)=>{
+         
+         console.log(result);
+         this.router.navigate(['/opportunities']);
+       })
        console.log(this.user)
      }).catch((err)=>{
        console.log("error to login")

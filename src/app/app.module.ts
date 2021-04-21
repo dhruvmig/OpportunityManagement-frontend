@@ -14,7 +14,9 @@ import {
 } from 'angularx-social-login';
 import { OpportunitiesComponent } from './components/opportunities/opportunities.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
+import {TokenInterceptorService} from './services/token-interceptor.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -50,7 +52,13 @@ import { HttpClientModule } from '@angular/common/http';
           }
         ]
       } as SocialAuthServiceConfig,
-    }
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
