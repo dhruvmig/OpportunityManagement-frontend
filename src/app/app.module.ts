@@ -17,7 +17,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
-
+import { TrendsComponent } from './components/trends/trends.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { AuthGuard } from './guards/auth.guard';
     NavbarComponent,
     LoginComponent,
     OpportunitiesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TrendsComponent,
+    // TrendsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { AuthGuard } from './guards/auth.guard';
     ReactiveFormsModule,
     SocialLoginModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [
     {

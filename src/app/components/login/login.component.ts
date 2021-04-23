@@ -45,9 +45,9 @@ export class LoginComponent implements OnInit {
      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user)=>{
        this.user = user;
        this.cookie.set('token',user.authToken);
-       this.loginService.login(this.user).subscribe((result)=>{
-         
-         console.log(result);
+       this.loginService.login(this.user).subscribe((result:any)=>{
+        this.loginService.setCurrentUser(result.id);
+        //  console.log('logged user is ',result.id);
          this.router.navigate(['/opportunities']);
        })
        console.log(this.user)

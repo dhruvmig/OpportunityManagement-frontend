@@ -42,6 +42,7 @@
       <td mat-cell *matCellDef="let element"> 
             <mat-icon (click)="openDialog(element,'edit')">edit</mat-icon>  
             <mat-icon (click)="openDialog(element,'delete')">delete</mat-icon>  
+            <mat-icon (click)="openDialog(element,'info')">info</mat-icon>
       </td>
     </ng-container>
    
@@ -87,6 +88,10 @@
           <!-- <input matInput [matDatepicker]="picker" type="text" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker> -->
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Opportunity Description</mat-label>
+          <input matInput  formControlName="description">
         </mat-form-field>
         </form>
       </div>
@@ -148,11 +153,45 @@
           <mat-label>Date</mat-label>
           <input type="date" formControlName="date" matInput ngModel={{editOpportunity?.date}}>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Opportunity Description</mat-label>
+          <input matInput  formControlName="description" ngModel={{editOpportunity?.description}}>
+        </mat-form-field>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="infoOpportunityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Opportunity Details</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <h4>ED:     {{infoOpportunity?.ed}}</h4>
+        <p>Location:  {{infoOpportunity?.location}}</p>
+          <p>
+            {{infoOpportunity?.description}}
+          </p>
+          <p>Last Date:  {{infoOpportunity?.date}}</p>
+          <p>
+            SKills: 
+            {{infoOpportunity?.skills}}
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

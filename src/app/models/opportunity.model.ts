@@ -4,5 +4,7 @@ export interface Opportunity {
     date: string;
     location: string;
     ed: string;
+    description:string;
+    createdBy:string;
   }
   

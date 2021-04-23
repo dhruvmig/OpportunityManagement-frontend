@@ -4,6 +4,7 @@ import {Opportunity} from '../../models/opportunity.model';
 import { OpportunityService } from 'src/app/services/opportunity.service';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-opportunities',
   templateUrl: './opportunities.component.html',
@@ -26,14 +27,20 @@ export class OpportunitiesComponent implements OnInit {
     ed:[''],
     skills:[''],
     location:[''],
-    date:['']
+    date:[''],
+    description:[''],
+    createdBy:['']
   })
   deleteOpportunity: any;
   editOpportunity: any;
-  constructor(private opportunityService:OpportunityService,private fb: FormBuilder) { }
+  infoOpportunity: any;
+  currentUser: any;
+  constructor(private opportunityService:OpportunityService,private fb: FormBuilder,private loginService:LoginService) { }
 
   ngOnInit(): void {
      this.getEmployee();
+      this.currentUser = this.loginService.getCurrentUser();
+     console.log('current usdr is ',this.currentUser)
   }
 
   openDialog(opportunity:any,mode:string){
@@ -58,6 +65,12 @@ export class OpportunitiesComponent implements OnInit {
           this.editOpportunity = opportunity;
           button.setAttribute('data-target','#editOpportunityModal');
         }
+        if(mode === 'info')
+        {
+          this.infoOpportunity = opportunity;
+          console.log("info opp is ",this.infoOpportunity);
+          button.setAttribute('data-target','#infoOpportunityModal');
+        }
         container!.appendChild(button);
         button.click();
 
@@ -76,12 +89,14 @@ export class OpportunitiesComponent implements OnInit {
   }
   onSubmit(){
     // console.log('form data is ',this.opportunityForm.value);
+    // this.opportunityForm.value.createdBy = this.loginService.getCurrentUser();
+    
     this.opportunityService.addOpportunity (this.opportunityForm.value).subscribe((opportunity)=>{
-        // console.log("employe added successfully",opportunity);
+        console.log("employe added successfully",opportunity);
         this.getEmployee();
     },
     (err)=>{
-      console.log("error to add opprotunity")
+      console.log("error to add opprotunity",err)
     });
   }
   
@@ -109,5 +124,16 @@ export class OpportunitiesComponent implements OnInit {
       // console.log(element);
       this.getEmployee();
     });
+  }
+
+  checkCanEdit(opportunity:Opportunity):Boolean
+  {
+     if(this.currentUser == this.opportunityService.checkAccess(opportunity.id))
+     {
+       return true;
+     } 
+     else{
+       return false;
+     }
   }
 }
