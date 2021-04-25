@@ -19,6 +19,7 @@ import {TokenInterceptorService} from './services/token-interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TrendsComponent } from './components/trends/trends.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LogsComponent } from './components/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     OpportunitiesComponent,
     PageNotFoundComponent,
     TrendsComponent,
+    LogsComponent,
     // TrendsComponent
   ],
   imports: [

@@ -108,7 +108,7 @@ export class OpportunitiesComponent implements OnInit {
   }
   onEdit(element:any){
     // console.log("edittting",this.opportunityForm.value,element)
-    this.opportunityService.updateOpportunity (element.id ,this.opportunityForm.value).subscribe((opportunity)=>{
+    this.opportunityService.updateOpportunity (this.currentUser,element.id ,this.opportunityForm.value).subscribe((opportunity)=>{
       // console.log("employe added successfully",opportunity);
       this.getEmployee();
   },
@@ -120,7 +120,7 @@ export class OpportunitiesComponent implements OnInit {
   onDelete(element:any){
     // console.log("deleting",element);
 
-    this.opportunityService.deleteOpportunity(element.id).subscribe((element)=>{
+    this.opportunityService.deleteOpportunity(element.id,this.currentUser).subscribe((element)=>{
       // console.log(element);
       this.getEmployee();
     });

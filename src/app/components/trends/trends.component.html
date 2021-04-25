@@ -1,16 +1,17 @@
-<p>trends works!</p>
-<mat-toolbar-row>
+<div class="container">
+    <mat-toolbar-row>
         <button mat-button (click)="changeTrend('skills')">Skills</button>
         <button mat-button (click)="changeTrend('Location')">Location</button>
         <button mat-button (click)="changeTrend('ed')">ED</button>
         <button mat-button (click)="changeTrend('date')">Date</button>
-</mat-toolbar-row>
+    </mat-toolbar-row>
 
-<table>
-    <tr>
-        <td>
-            <ngx-charts-bar-vertical [results]="trends">
-            </ngx-charts-bar-vertical>
-        </td>
-    </tr>
+    <table>
+        <tr>
+            <td>
+                <ngx-charts-bar-vertical [results]="trends">
+                </ngx-charts-bar-vertical>
+            </td>
+        </tr>
 </table>
+</div>
