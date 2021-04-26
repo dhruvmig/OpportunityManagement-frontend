@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Opportunity} from '../../models/opportunity.model';
 import { OpportunityService } from 'src/app/services/opportunity.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { LoginService } from 'src/app/services/login.service';
 @Component({
@@ -24,11 +24,11 @@ export class OpportunitiesComponent implements OnInit {
   columnsToDisplay = ['id','ed', 'skills', 'date', 'location',' '];
   expandedElement?: Opportunity | null;
   opportunityForm = this.fb.group({
-    ed:[''],
-    skills:[''],
-    location:[''],
-    date:[''],
-    description:[''],
+    ed:['',Validators.required],
+    skills:['',Validators.required],
+    location:['',Validators.required],
+    date:['',Validators.required],
+    description:['',[Validators.required,Validators.minLength(10),Validators.maxLength(150)]],
     createdBy:['']
   })
   deleteOpportunity: any;
@@ -38,7 +38,7 @@ export class OpportunitiesComponent implements OnInit {
   constructor(private opportunityService:OpportunityService,private fb: FormBuilder,private loginService:LoginService) { }
 
   ngOnInit(): void {
-     this.getEmployee();
+     this.getOpportunity();
       this.currentUser = this.loginService.getCurrentUser();
      console.log('current usdr is ',this.currentUser)
   }
@@ -75,7 +75,7 @@ export class OpportunitiesComponent implements OnInit {
         button.click();
 
   }
-  getEmployee(){
+  getOpportunity(){
     this.opportunityService.getOpportunity().subscribe((response)=>{
       this.dataSource = response;
       console.log('in add',this.dataSource);
@@ -88,12 +88,12 @@ export class OpportunitiesComponent implements OnInit {
     })
   }
   onSubmit(){
-    // console.log('form data is ',this.opportunityForm.value);
+    // console.log('form data is ',this.opportunityForm);
     // this.opportunityForm.value.createdBy = this.loginService.getCurrentUser();
     
     this.opportunityService.addOpportunity (this.opportunityForm.value).subscribe((opportunity)=>{
         console.log("employe added successfully",opportunity);
-        this.getEmployee();
+        this.getOpportunity();
     },
     (err)=>{
       console.log("error to add opprotunity",err)
@@ -110,7 +110,7 @@ export class OpportunitiesComponent implements OnInit {
     // console.log("edittting",this.opportunityForm.value,element)
     this.opportunityService.updateOpportunity (this.currentUser,element.id ,this.opportunityForm.value).subscribe((opportunity)=>{
       // console.log("employe added successfully",opportunity);
-      this.getEmployee();
+      this.getOpportunity();
   },
   (err)=>{
     console.log("error to add opprotunity")
@@ -122,7 +122,7 @@ export class OpportunitiesComponent implements OnInit {
 
     this.opportunityService.deleteOpportunity(element.id,this.currentUser).subscribe((element)=>{
       // console.log(element);
-      this.getEmployee();
+      this.getOpportunity();
     });
   }
 
@@ -135,5 +135,9 @@ export class OpportunitiesComponent implements OnInit {
      else{
        return false;
      }
+  }
+
+  check(){
+    console.log("velaue",this.opportunityForm);
   }
 }

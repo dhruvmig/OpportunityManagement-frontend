@@ -1,5 +1,5 @@
 <div class="container" id="main-container">
-  <button mat-raised-button color="primary"  (click)="openDialog(null,'add')">Add Opportunity</button>
+  <button class="addButton" mat-raised-button color="primary"  (click)="openDialog(null,'add')">Add Opportunity</button>
 
   <mat-form-field>
     <mat-label>Filter</mat-label>
@@ -52,9 +52,9 @@
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   
     <!-- Row shown when there is no matching data. -->
-    <!-- <tr class="mat-row" *matNoDataRow>
+    <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr> -->
+    </tr>
   </table>
 
 </div>
@@ -72,32 +72,52 @@
         <form [formGroup]="opportunityForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>ED</mat-label>
-          <input matInput type="text" formControlName="ed">
+          <input matInput type="text" formControlName="ed" required>
+          <mat-error 
+          *ngIf="opportunityForm.controls['ed'].invalid && (opportunityForm.controls['ed'].dirty || opportunityForm.controls['ed'].touched)">
+          ED Name is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Skills</mat-label>
-          <input matInput type="text" formControlName="skills">
+          <input matInput type="text" formControlName="skills" required>
+          <mat-error 
+          *ngIf="opportunityForm.controls['skills'].invalid && (opportunityForm.controls['skills'].dirty || opportunityForm.controls['skills'].touched)">
+          Skills  is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Location</mat-label>
-          <input matInput type="text" formControlName="location">
+          <input matInput type="text" formControlName="location" required>
+          <mat-error 
+          *ngIf="opportunityForm.controls['location'].invalid && (opportunityForm.controls['location'].dirty || opportunityForm.controls['location'].touched)">
+          location  is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill" class="md-datepicker-calendar-pane">
           <mat-label>Date</mat-label>
-          <input type="date" formControlName="date" matInput>
+          <input type="date" formControlName="date" matInput required>
+          <mat-error 
+          *ngIf="opportunityForm.controls['date'].invalid && (opportunityForm.controls['date'].dirty || opportunityForm.controls['date'].touched)">
+          date  is required
+          </mat-error> 
           <!-- <input matInput [matDatepicker]="picker" type="text" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker> -->
         </mat-form-field>
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label>Opportunity Description</mat-label>
-          <input matInput  formControlName="description">
+          <input matInput  formControlName="description" required>
+          <mat-error 
+          *ngIf="opportunityForm.controls['description'].invalid && (opportunityForm.controls['description'].dirty || opportunityForm.controls['description'].touched)">
+          Description with min length 10 and max length 100 is required
+          </mat-error>
         </mat-form-field>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="!opportunityForm.valid" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -139,29 +159,49 @@
         <form [formGroup]="opportunityForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>ED</mat-label>
-          <input matInput type="text" formControlName="ed" ngModel={{editOpportunity?.ed}}>
+          <input matInput type="text" formControlName="ed" required ngModel={{editOpportunity?.ed}} (keyup)="check()">
+          <mat-error 
+          *ngIf="opportunityForm.controls['ed'].invalid && (opportunityForm.controls['ed'].dirty || opportunityForm.controls['ed'].touched)">
+          ED Name is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Skills</mat-label>
-          <input matInput type="text" formControlName="skills" ngModel={{editOpportunity?.skills}}>
+          <input matInput type="text" formControlName="skills" required ngModel={{editOpportunity?.skills}}>
+          <mat-error 
+          *ngIf="opportunityForm.controls['skills'].invalid && (opportunityForm.controls['skills'].dirty || opportunityForm.controls['skills'].touched)">
+          Skills  is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Location</mat-label>
-          <input matInput type="text" formControlName="location" ngModel={{editOpportunity?.location}}>
+          <input matInput type="text" formControlName="location" required ngModel={{editOpportunity?.location}}>
+          <mat-error 
+          *ngIf="opportunityForm.controls['location'].invalid && (opportunityForm.controls['location'].dirty || opportunityForm.controls['location'].touched)">
+          location  is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill" class="md-datepicker-calendar-pane">
           <mat-label>Date</mat-label>
-          <input type="date" formControlName="date" matInput ngModel={{editOpportunity?.date}}>
+          <input type="date" formControlName="date" matInput required ngModel={{editOpportunity?.date}}>
+          <mat-error 
+          *ngIf="opportunityForm.controls['date'].invalid && (opportunityForm.controls['date'].dirty || opportunityForm.controls['date'].touched)">
+          date  is required
+          </mat-error> 
         </mat-form-field>
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label>Opportunity Description</mat-label>
-          <input matInput  formControlName="description" ngModel={{editOpportunity?.description}}>
+          <input matInput  formControlName="description" required ngModel={{editOpportunity?.description}}>
+          <mat-error 
+          *ngIf="opportunityForm.controls['description'].invalid && (opportunityForm.controls['description'].dirty || opportunityForm.controls['description'].touched)">
+          Description with min length 10 and max length 100 is required
+          </mat-error>
         </mat-form-field>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" [disabled]="!opportunityForm.valid" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
