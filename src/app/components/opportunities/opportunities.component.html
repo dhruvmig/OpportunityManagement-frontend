@@ -1,7 +1,7 @@
 <div class="container" id="main-container">
   <button class="addButton" mat-raised-button color="primary"  (click)="openDialog(null,'add')">Add Opportunity</button>
 
-  <mat-form-field>
+  <mat-form-field class="filter">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
@@ -40,9 +40,9 @@
     <ng-container matColumnDef=" ">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let element"> 
-            <mat-icon (click)="openDialog(element,'edit')">edit</mat-icon>  
-            <mat-icon (click)="openDialog(element,'delete')">delete</mat-icon>  
-            <mat-icon (click)="openDialog(element,'info')">info</mat-icon>
+            <mat-icon (click)="openDialog(element,'edit')" class="icons">edit</mat-icon>  
+            <mat-icon (click)="openDialog(element,'delete')" class="icons">delete</mat-icon>  
+            <mat-icon (click)="openDialog(element,'info')" class="icons">info</mat-icon>
       </td>
     </ng-container>
    

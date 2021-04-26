@@ -59,3 +59,14 @@ table {
   position: absolute;
 
 } */
+.icons{
+  color:darkgrey;
+}
+.icons:hover{
+  cursor: pointer;
+  color:turquoise;
+}
+
+.filter{
+  margin-left: 100px;
+}

@@ -9,7 +9,9 @@ import { LogsService } from 'src/app/services/logs.service';
 })
 export class LogsComponent implements OnInit {
   dataSource?: any;
-  columnsToDisplay = ['logId','name','userId', 'action', 'opportunityId', 'dateTime'];
+  columnsToDisplay = ['logId','name','userId', 'action', 'opportunityId', 'dateTime',' '];
+  oldValues?: any;
+  newValues?: any;
   filterValues?:any;
   filterSelectObj ?:any;
   constructor(private logsService:LogsService) {
@@ -49,6 +51,47 @@ export class LogsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  setLog(element:any)
+  {
+    
+    if(element.action=="Updated this Opportunity")
+    {
+      let x = element.oldOpp;
+      let y = element.newOpp;
+      let a = x.indexOf(',');
+      let b = y.indexOf(',');
+      // x = this.oldValues.substring(0,x.length-16);
+      // y = this.newValues.substring(0,y.length-16);
+      this.newValues=y.substring(b+1);
+      this.oldValues =x.substring(a+1); 
+      a=this.oldValues.lastIndexOf(',');
+      b= this.newValues.lastIndexOf(',');
+      
+      this.newValues = this.newValues.substring(0,b);
+      this.oldValues = this.oldValues.substring(0,a);
+      console.log("required log is ",element);
+    }
+    else if(element.action == "Deleted this Opportunity")
+    {
+      let x = element.oldOpp;
+      let a = x.indexOf(',');
+      this.oldValues =x.substring(a+1); 
+      a=this.oldValues.lastIndexOf(',');
+      this.oldValues = this.oldValues.substring(0,a);
+      this.newValues =" Opportunity Deleted" ;
+    }
+    else if(element.action == "Added new Opportunity"){
+      this.oldValues ="Nothing yet";
+      let x = element.newOpp;
+      let a = x.indexOf(',');
+      this.newValues =x.substring(a+1); 
+      a=this.newValues.lastIndexOf(',');
+      this.newValues = this.newValues.substring(0,a);
+    }
+
+    
   }
 
 
