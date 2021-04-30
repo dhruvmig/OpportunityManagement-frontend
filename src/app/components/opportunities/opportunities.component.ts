@@ -5,6 +5,7 @@ import { OpportunityService } from 'src/app/services/opportunity.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { LoginService } from 'src/app/services/login.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-opportunities',
   templateUrl: './opportunities.component.html',
@@ -35,7 +36,13 @@ export class OpportunitiesComponent implements OnInit {
   editOpportunity: any;
   infoOpportunity: any;
   currentUser: any;
-  constructor(private opportunityService:OpportunityService,private fb: FormBuilder,private loginService:LoginService) { }
+  logData:any;
+  logSize: any;
+  constructor(private opportunityService:OpportunityService,
+    private fb: FormBuilder,
+    private loginService:LoginService,
+    private cookie:CookieService
+          ) { }
 
   ngOnInit(): void {
      this.getOpportunity();
@@ -62,15 +69,22 @@ export class OpportunitiesComponent implements OnInit {
         }
         if(mode === 'edit')
         {
+          
           this.editOpportunity = opportunity;
           button.setAttribute('data-target','#editOpportunityModal');
         }
-        if(mode === 'info')
-        {
-          this.infoOpportunity = opportunity;
-          console.log("info opp is ",this.infoOpportunity);
-          button.setAttribute('data-target','#infoOpportunityModal');
-        }
+       if(mode=='oppInfo')
+       {
+         console.log("opp info is ",opportunity);
+        this.opportunityService.getLogData(opportunity.id).subscribe((res)=>{
+          this.logData = res;
+          this.logSize = this.logData.length;
+          console.log("log data is ",this.logData,this.logData.length);
+        })
+         this.infoOpportunity = opportunity;
+         button.setAttribute("data-target",'#infoOpportunityModal');
+         console.log(button);
+       }
         container!.appendChild(button);
         button.click();
 
@@ -108,6 +122,7 @@ export class OpportunitiesComponent implements OnInit {
   }
   onEdit(element:any){
     // console.log("edittting",this.opportunityForm.value,element)
+    console.log('update on edit',this.opportunityForm.value);
     this.opportunityService.updateOpportunity (this.currentUser,element.id ,this.opportunityForm.value).subscribe((opportunity)=>{
       // console.log("employe added successfully",opportunity);
       this.getOpportunity();
@@ -137,7 +152,8 @@ export class OpportunitiesComponent implements OnInit {
      }
   }
 
-  check(){
-    console.log("velaue",this.opportunityForm);
+  findLogs(){
+      console.log("infoOpportunity",this.infoOpportunity.id);
+      this.cookie.set("OpportunityId",this.infoOpportunity.id);
   }
 }

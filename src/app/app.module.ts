@@ -20,6 +20,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { TrendsComponent } from './components/trends/trends.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LogsComponent } from './components/logs/logs.component';
+import { TestingComponent } from './components/testing/testing.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { LogsComponent } from './components/logs/logs.component';
     PageNotFoundComponent,
     TrendsComponent,
     LogsComponent,
+    TestingComponent,
+
     // TrendsComponent
   ],
   imports: [
@@ -42,7 +46,8 @@ import { LogsComponent } from './components/logs/logs.component';
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    AgGridModule.withComponents()
   ],
   providers: [
     {

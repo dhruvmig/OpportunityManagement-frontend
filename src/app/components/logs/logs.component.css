@@ -54,3 +54,12 @@ table {
 mat-form-field{
   width: 100%;
 }
+.icons{
+  cursor: pointer;
+  color:darkgrey;
+}
+
+.icons:hover{
+  cursor: pointer;
+  color:turquoise;
+}

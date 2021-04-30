@@ -26,12 +26,17 @@ export class OpportunityService {
     return this.http.delete(`http://localhost:8080/opportunity/delete/${currentUser}/${id}`);
   }
   public updateOpportunity(currentUser:String,id:number,opportunity:Opportunity){
+    console.log("opportunity to update is ",opportunity);
     return this.http.put(`http://localhost:8080/opportunity/update/${currentUser}/${id}`,opportunity);
   }
 
   public checkAccess(id:number)
   {
     return this.http.get(`http://localhost:8080/opportunity/getCreatedBy/${id}`);
+  }
+  public getLogData(id:number)
+  {
+    return this.http.get(`http://localhost:8080/getAudits/${id}`);
   }
 
 }
