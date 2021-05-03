@@ -9,7 +9,7 @@
     <table>
         <tr>
             <td>
-                <ngx-charts-bar-vertical [results]="trends"
+                <!-- <ngx-charts-bar-vertical [results]="trends"
                 [view]="[700, 400]"
                 [scheme]="colorScheme"
 
@@ -22,7 +22,21 @@
                 [xAxisLabel]="xAxisLabel"
                 [yAxisLabel]="yAxisLabel"
   (select)="onSelect($event)">
-                </ngx-charts-bar-vertical>
+                </ngx-charts-bar-vertical> -->
+                <ngx-charts-bar-vertical-2d
+                    [view]="[700, 400]"
+                    [scheme]="colorScheme"
+                    [results]="trends"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    >
+                </ngx-charts-bar-vertical-2d>
             </td>
         </tr>
 </table>

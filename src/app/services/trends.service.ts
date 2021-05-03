@@ -10,6 +10,6 @@ export class TrendsService {
 
   getTrendsCount(trend:String)
   {
-    return this.http.get(`http://localhost:8080/trends/${trend}`);
+    return this.http.get(`http://localhost:8080/getTrends/${trend}`);
   }
 }

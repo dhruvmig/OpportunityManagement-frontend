@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
@@ -13,22 +13,23 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  // loginForm: FormGroup;
   public loginInvalid = false;
   private formSubmitAttempt = false;
   user?: SocialUser;
   loggedIn?: boolean;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    // private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authService: SocialAuthService,
     private cookie:CookieService,
     private loginService: LoginService) {
-      this.loginForm = this.fb.group({
-        username: ['', Validators.email],
-        password: ['', Validators.required]
-      });
+      // this.loginForm = this.fb.group({
+      //   username: ['', Validators.email],
+      //   password: ['', Validators.required]
+      // });
      }
 
   ngOnInit(): void {

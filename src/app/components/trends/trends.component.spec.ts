@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TrendsService } from 'src/app/services/trends.service';
 
 import { TrendsComponent } from './trends.component';
 
@@ -8,7 +10,9 @@ describe('TrendsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TrendsComponent ]
+      imports:[HttpClientModule],
+      declarations: [ TrendsComponent ],
+      providers:[TrendsService]
     })
     .compileComponents();
   });

@@ -38,17 +38,21 @@ export class LogsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-      this.logsService.getLogs().subscribe((res)=>{
-          this.dataSource = res;
-          console.log("res is ",res)
-          this.dataSource = new MatTableDataSource(this.dataSource);
-          if(this.cookie.get("OpportunityId")!=null)
-          {
-            this.tempFilterValue = this.cookie.get("OpportunityId");
-            this.dataSource.filter = this.tempFilterValue.trim().toLowerCase();
-            this.cookie.set("OpportunityId","");
-          }
-        });
+      this.getAllLogs();
+  }
+
+  getAllLogs(){
+    this.logsService.getLogs().subscribe((res)=>{
+      this.dataSource = res;
+      console.log("res is ",res)
+      this.dataSource = new MatTableDataSource(this.dataSource);
+      if(this.cookie.get("OpportunityId")!=null)
+      {
+        this.tempFilterValue = this.cookie.get("OpportunityId");
+        this.dataSource.filter = this.tempFilterValue.trim().toLowerCase();
+        this.cookie.set("OpportunityId","");
+      }
+    });
   }
   applyFilter(event: Event) {
     let filterValue = (event.target as HTMLInputElement).value;
