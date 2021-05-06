@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { LoginService } from 'src/app/services/login.service';
@@ -41,5 +42,10 @@ describe('LoginComponent', () => {
 
   it('should create login component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a Login Button', () =>{
+    const table= fixture.debugElement.query(By.css('button')).nativeElement;
+    expect(table).toBeTruthy();
   });
 });

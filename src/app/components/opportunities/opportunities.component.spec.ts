@@ -29,13 +29,48 @@ describe('OpportunitiesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should has correct rows', () => {
-  //   fixture.detectChanges();
-  //   // query debug elements doesn't work
-  //   const rowDebugElements = de.queryAll(By.css('tbody tr'));
-  //   expect(rowDebugElements.length).toBe(0);
-  //   // has to fallback to query DOM elements
-  //   const rowHtmlElements = de.nativeElement.querySelectorAll('tbody tr');
-  //   expect(rowHtmlElements.length).toBe(10);
-  // });
+  it('should have a Filter Bar', () =>{
+    const table= fixture.debugElement.query(By.css('#Filter')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
+  it('should have a table', () =>{
+    const table= fixture.debugElement.query(By.css('table')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
+  it('should have a Add Opportunity Button', () =>{
+    const table= fixture.debugElement.query(By.css('#addButton')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
+  it('should Update Opportunity Modal ', () =>{
+    const table= fixture.debugElement.query(By.css('#editOpportunityModal'));
+    expect(table).toBeTruthy();
+  });
+
+  it('should Delete Opportunity Modal', () =>{
+    const table= fixture.debugElement.query(By.css('#deleteOpportunityModal'));
+    expect(table).toBeTruthy();
+  });
+
+  it('should Show Opportunity Info Modal', () =>{
+    const table= fixture.debugElement.query(By.css('#infoOpportunityModal'));
+    expect(table).toBeTruthy();
+  });
+
+  it('should Update Opportunity  ', () =>{
+    const table= fixture.debugElement.query(By.css('#save'));
+    expect(table).toBeTruthy();
+  });
+
+  it('should Delete Opportunity ', () =>{
+    const table= fixture.debugElement.query(By.css('#Delete'));
+    expect(table).toBeTruthy();
+  });
+
+  it('should Show Logs button', () =>{
+    const table= fixture.debugElement.query(By.css('#modify'));
+    expect(table).toBeTruthy();
+  });
 });

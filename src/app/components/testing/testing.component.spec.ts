@@ -29,5 +29,10 @@ describe('TestingComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have a Grid', () =>{
+    const table= fixture.debugElement.query(By.css('ag-grid-angular')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
   
 });

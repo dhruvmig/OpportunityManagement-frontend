@@ -61,8 +61,9 @@ export class LogsComponent implements OnInit {
 
   setLog(element:any)
   {
+    console.log("elementi sidfjlsidjf",element)
     
-    if(element.action=="Updated this Opportunity")
+    if(element.action=="Updated ")
     {
       let x = element.oldOpp;
       let y = element.newOpp;
@@ -79,7 +80,7 @@ export class LogsComponent implements OnInit {
       this.oldValues = this.oldValues.substring(0,a);
       console.log("required log is ",element);
     }
-    else if(element.action == "Deleted this Opportunity")
+    else if(element.action == "Deleted")
     {
       let x = element.oldOpp;
       let a = x.indexOf(',');
@@ -88,7 +89,7 @@ export class LogsComponent implements OnInit {
       this.oldValues = this.oldValues.substring(0,a);
       this.newValues =" Opportunity Deleted" ;
     }
-    else if(element.action == "Added new Opportunity"){
+    else if(element.action == "Added "){
       this.oldValues ="Nothing yet";
       let x = element.newOpp;
       let a = x.indexOf(',');

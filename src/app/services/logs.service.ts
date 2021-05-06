@@ -9,6 +9,6 @@ export class LogsService {
   constructor(private http:HttpClient) { }
 
   getLogs(){
-    return this.http.get(`http://localhost:8080/audits`);
+    return this.http.get(`http://localhost:8080/audits/all`);
   }
 }

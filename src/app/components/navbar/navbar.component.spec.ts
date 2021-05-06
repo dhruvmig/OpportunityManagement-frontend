@@ -25,5 +25,11 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // it('should have Yes in "Yes Button"', () => {
+  //   const btn = fixture.debugElement.nativeElement.querySelector('#opportunities');
+  //   expect(btn.innerHTML).toBe('Hello');
+  //   console.log("button is ",btn);
+  // });
+
   
 });

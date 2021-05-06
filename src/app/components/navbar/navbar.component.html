@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav" *ngIf="loggedIn()">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/opportunities" *ngIf="loggedIn()">Opportunities</a>
+        <a class="nav-link" routerLink="/opportunities" *ngIf="loggedIn()" >Opportunities</a>
       </li>
       <li class="nav-item ">
         <a class="nav-link" routerLink="/search-opportunities" *ngIf="loggedIn()">Search</a>
@@ -21,7 +21,9 @@
       <li class="nav-item">
         <a class="nav-link"  (click)="logout()" *ngIf="loggedIn()">Logout</a>
       </li>
+      
     </ul>
+    <!-- <button id="opportunities">Hello</button> -->
   </div>
 </nav>
 <!-- 

@@ -1,5 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { LogsService } from 'src/app/services/logs.service';
 
@@ -12,7 +14,7 @@ describe('LogsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[HttpClientModule],
+      imports:[HttpClientTestingModule,HttpClientModule],
       declarations: [ LogsComponent ],
       providers:[LogsService]
     })
@@ -20,22 +22,30 @@ describe('LogsComponent', () => {
   });
 
   beforeEach(() => {
-    logsService = TestBed.get(LogsService);
     TestBed.configureTestingModule({ providers: [LogsService] });
     fixture = TestBed.createComponent(LogsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-  it('Should call getLogs method and return no data',()=>{
-    spyOn(logsService, 'getLogs').and.returnValue( of ([]));
-    // jasmine.createSpy('getAllLogs').and.returnValue( of ([]));
-    let data = component.getAllLogs();
-    expect(logsService.getLogs()).toHaveBeenCalled();
-    expect(component.dataSource).toEqual([]);
-  })
+  it('should have Search Bar', () =>{
+    const table= fixture.debugElement.query(By.css('input')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
+
+  it('should have a table', () =>{
+    const table= fixture.debugElement.query(By.css('table')).nativeElement;
+    expect(table).toBeTruthy();
+  });
+
+ 
+  it('should Show Audit HIstory', () =>{
+    const table= fixture.debugElement.query(By.css('#logInfoModal'));
+    expect(table).toBeTruthy();
+  });
 });

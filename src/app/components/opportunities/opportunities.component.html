@@ -1,9 +1,9 @@
 <div class="container" id="main-container">
-  <button class="addButton" mat-raised-button color="primary"  (click)="openDialog(null,'add')">Add Opportunity</button>
+  <button class="addButton" id="addButton" mat-raised-button color="primary"  (click)="openDialog(null,'add')">Add Opportunity</button>
 
   <mat-form-field class="filter">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    <input matInput id="Filter" (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -36,9 +36,9 @@
     <ng-container matColumnDef=" ">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let element"> 
-            <mat-icon (click)="openDialog(element,'edit')" class="icons">edit</mat-icon>  
-            <mat-icon (click)="openDialog(element,'delete')" class="icons">delete</mat-icon>  
-            <mat-icon (click)="openDialog(element,'oppInfo')" class="icons">info</mat-icon>
+            <mat-icon (click)="openDialog(element,'edit')" class="icons" id="update">edit</mat-icon>  
+            <mat-icon (click)="openDialog(element,'delete')" class="icons" id="delete">delete</mat-icon>  
+            <mat-icon (click)="openDialog(element,'oppInfo')" class="icons" id="show-info">info</mat-icon>
       </td>
     </ng-container>
    
@@ -61,28 +61,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade" id="addOpportunityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h3 class="modal-title" >Add Opportunity</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -158,7 +141,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" (click)="onDelete(deleteOpportunity)" data-dismiss="modal">Yes</button>
+        <button type="button" id="Delete" class="btn btn-primary" (click)="onDelete(deleteOpportunity)" data-dismiss="modal">Yes</button>
       </div>
     </div>
   </div>
@@ -169,7 +152,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h3 class="modal-title" id="exampleModalLabel">Update Opportunity</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -221,7 +204,7 @@
        
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [disabled]="!opportunityForm.valid" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
+        <button type="button" id="save" class="btn btn-primary" [disabled]="!opportunityForm.valid" (click)="onEdit(editOpportunity)" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -258,7 +241,7 @@
                   
             </li>
           </ul> -->
-          <a (click)="findLogs()" href="/audits">Modification history</a>
+          <a (click)="findLogs()" id="modify" href="/audits">Modification history</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

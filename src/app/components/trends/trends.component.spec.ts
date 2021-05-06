@@ -26,4 +26,19 @@ describe('TrendsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should have Skills Tab',()=>{
+    const btn = fixture.debugElement.nativeElement.querySelector('#Skills');
+    expect(btn.innerHTML).toBe('Skills');
+  })
+
+  it('Should have Location Tab',()=>{
+    const btn = fixture.debugElement.nativeElement.querySelector('#Location');
+    expect(btn.innerHTML).toBe('Location');
+  })
+
+  it('Should have Ed Tab',()=>{
+    const btn = fixture.debugElement.nativeElement.querySelector('#Ed');
+    expect(btn.innerHTML).toBe('ED');
+  })
 });

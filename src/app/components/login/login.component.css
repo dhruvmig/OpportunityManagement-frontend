@@ -16,3 +16,13 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+
+#loginicon{
+  margin-top: 8px;
+  margin-left: 0px;
+  width: 40px;
+  float: left;
+  shape-outside: cross-fade();
+  -ms-zoom-animation: default;
+}
