@@ -12,7 +12,11 @@ export class OpportunityService {
   constructor(private http:HttpClient,private loginService :LoginService) { }
 
   public getOpportunity(): Observable<Opportunity[]> {
-    return this.http.get<Opportunity[]>(`http://localhost:8080/opportunity`);
+    return this.http.get<Opportunity[]>(`http://localhost:8080/opportunity/active`);
+  }
+
+  public getAllOpportunity(): Observable<Opportunity[]> {
+    return this.http.get<Opportunity[]>(`http://localhost:8080/opportunity/all`);
   }
 
   public addOpportunity(opportunity: Opportunity): Observable<Opportunity> {
@@ -22,11 +26,15 @@ export class OpportunityService {
 
   }
 
+  public deactivateOpportunity(id:number,currentUser:String){
+    return this.http.post(`http://localhost:8080/opportunity/deactivate/${currentUser}/${id}`,'');
+  }
+
   public deleteOpportunity(id:number,currentUser:String){
     return this.http.delete(`http://localhost:8080/opportunity/delete/${currentUser}/${id}`);
   }
   public updateOpportunity(currentUser:String,id:number,opportunity:Opportunity){
-    console.log("opportunity to update is ",opportunity);
+    console.log("opportunity to update is ",currentUser);
     return this.http.put(`http://localhost:8080/opportunity/update/${currentUser}/${id}`,opportunity);
   }
 

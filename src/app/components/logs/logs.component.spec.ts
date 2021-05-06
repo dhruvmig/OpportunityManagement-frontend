@@ -20,21 +20,21 @@ describe('LogsComponent', () => {
   });
 
   beforeEach(() => {
-    // logsService = TestBed.get(LogsService);
+    logsService = TestBed.get(LogsService);
     TestBed.configureTestingModule({ providers: [LogsService] });
     fixture = TestBed.createComponent(LogsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 
   it('Should call getLogs method and return no data',()=>{
     spyOn(logsService, 'getLogs').and.returnValue( of ([]));
+    // jasmine.createSpy('getAllLogs').and.returnValue( of ([]));
     let data = component.getAllLogs();
-    console.log('test data is ',data);
     expect(logsService.getLogs()).toHaveBeenCalled();
     expect(component.dataSource).toEqual([]);
   })

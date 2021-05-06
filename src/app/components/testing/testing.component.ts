@@ -14,12 +14,13 @@ export class TestingComponent implements OnInit {
 		{headerName: 'Skills', field: 'skills',filter:true},
     {headerName: 'Date', field: 'date' ,filter:true},
 		{headerName: 'Location', field: 'location' ,filter:true},
+    {headerName: 'Status', field: 'status' ,filter:true},
 		{headerName: '', field: ''}
   ];
   constructor(private oppService:OpportunityService) { }
 
   ngOnInit(): void {
-    this.oppService.getOpportunity().subscribe((res)=>{
+    this.oppService.getAllOpportunity().subscribe((res)=>{
       console.log("reso",res);
       this.rowData = res;
     })

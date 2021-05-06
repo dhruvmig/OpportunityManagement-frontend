@@ -135,7 +135,7 @@ export class OpportunitiesComponent implements OnInit {
   onDelete(element:any){
     // console.log("deleting",element);
 
-    this.opportunityService.deleteOpportunity(element.id,this.currentUser).subscribe((element)=>{
+    this.opportunityService.deactivateOpportunity(element.id,this.currentUser).subscribe((element)=>{
       // console.log(element);
       this.getOpportunity();
     });
