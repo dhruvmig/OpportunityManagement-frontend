@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Subject } from 'rxjs';
-
+import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,7 @@ export class LoginService {
     console.log("logged out");
   }
   login(user:any){
-    return this.http.post(`http://localhost:8080/login`, user);
+    return this.http.post(`${environment.apiBaseUrl}/login`, user);
   }
   loggedIn(){
     return !!this.cookie.get('token');
